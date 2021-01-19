@@ -36,12 +36,12 @@ def normalize(input_string):
     normalized_string = ""
     input_string = input_string.lower()
     s_len= len(input_string)
-    
+    chk= True
     cur=0
     for i in range(s_len):
+        if(input_string[-1]==' '):
+            chk=False
         if(input_string[cur]!=' ' and input_string[i]==' '):
-            if(i==s_len):
-                break
             normalized_string+=(input_string[cur:i])
             cur=i
         if(input_string[cur]==' ' and input_string[i]!=' '):
@@ -50,9 +50,10 @@ def normalize(input_string):
                 continue
             normalized_string+=' '
             cur=i
-    
+    if(not chk):
+        return normalized_string
+    normalized_string+=(input_string[cur:])
     return normalized_string
-
 
 def no_vowels(input_string):
     """
@@ -79,10 +80,9 @@ def no_vowels(input_string):
     
     s_len = len(input_string)
     cur=0
-
     for i in range(s_len):
-        if(input_string[i]=='a' or input_string[i]=='e' or input_string[i]=='i' or input_string[i]=='o' or input_string[i]=='u'):
+        if(input_string[i]=='a' or input_string[i]=='e' or input_string[i]=='i' or input_string[i]=='o' or input_string[i]=='u'or input_string[i]=='A' or input_string[i]=='E' or input_string[i]=='I' or input_string[i]=='O' or input_string[i]=='U'):
             no_vowel_string+=input_string[cur:i]
             cur=i+1
-    no_vowel_string+=input_string[cur:i+1]
+    no_vowel_string+=input_string[cur:]
     return no_vowel_string
